@@ -9,10 +9,10 @@
       @wheel.prevent="onWheel"
       @pointerdown="handlePointerDown"
       @pointermove="onPointerMove"
-      @pointerup="onPointerUp"
-      @pointercancel="onPointerUp"
+      @pointerup="handlePointerUp"
+      @pointercancel="handlePointerUp"
     >
-      
+
       <g v-if="backgroundMarkup" :transform="backgroundTransform" v-html="backgroundMarkup" />
       <rect
         v-else
@@ -28,12 +28,12 @@
         v-for="space in visibleSpaces"
         :key="space.id"
         class="space-group"
-        :class="{ 
-            dimmed: isDimmed(space), 
+        :data-space-id="space.id"
+        :class="{
+            dimmed: isDimmed(space),
             highlighted: space.id === highlightedSpaceId,
-            'search-matched': isSearchResult(space) /* 👈 Classe appliquée si le stand est trouvé */
+            'search-matched': isSearchResult(space)
           }"
-          @click.stop="onSpaceClick(space, $event)"
       >
         <title>{{ tooltipFor(space) }}</title>
         <polygon
@@ -85,10 +85,11 @@ const svgRef = ref(null);
 const backgroundMarkup = ref('');
 const backgroundTransform = ref('');
 
-// Variables pour distinguer le drag (glissement) du clic
-const MOVEMENT_THRESHOLD = 5; // Seuil max de mouvement en pixels pour autoriser le clic
+// Distingue un tap (ouvrir la fiche) d'un pan (glisser le plan).
+const MOVEMENT_THRESHOLD = 5;
 let startX = 0;
 let startY = 0;
+let pendingSpace = null;
 
 const {
   viewBoxString,
@@ -108,10 +109,35 @@ const containerAspectStyle = computed(() => ({
 
 const visibleSpaces = computed(() => props.spaces);
 
+function spaceFromEvent(event) {
+  const el = event.target;
+  if (!el || typeof el.closest !== 'function') return null;
+  const group = el.closest('.space-group');
+  if (!group) return null;
+  const id = group.getAttribute('data-space-id');
+  return props.spaces.find((s) => s.id === id) || null;
+}
+
 function handlePointerDown(event) {
   startX = event.clientX;
   startY = event.clientY;
+  // Capturer la cible AVANT setPointerCapture : une fois le pointeur
+  // capturé par le <svg>, pointerup/click sont retargetés vers le svg
+  // et n'atteignent plus le <g> du stand.
+  pendingSpace = spaceFromEvent(event);
   onPointerDown(event);
+}
+
+function handlePointerUp(event) {
+  const space = pendingSpace;
+  pendingSpace = null;
+  const deltaX = Math.abs(event.clientX - startX);
+  const deltaY = Math.abs(event.clientY - startY);
+  onPointerUp(event);
+
+  if (deltaX > MOVEMENT_THRESHOLD || deltaY > MOVEMENT_THRESHOLD) return;
+  if (!space || isDimmed(space)) return;
+  emit('space-click', space, { clientX: event.clientX, clientY: event.clientY });
 }
 
 function isDimmed(space) {
@@ -192,19 +218,6 @@ async function loadBackground() {
   } catch (err) {
     backgroundMarkup.value = ''; // déclenche le fallback visuel
   }
-}
-
-function onSpaceClick(space, event) {
-  const deltaX = Math.abs(event.clientX - startX);
-  const deltaY = Math.abs(event.clientY - startY);
-
-  // Si l'utilisateur a glissé la carte de plus de 5px, il s'agit d'un déplacement (pan) et non d'un clic
-  if (deltaX > MOVEMENT_THRESHOLD || deltaY > MOVEMENT_THRESHOLD) {
-    return;
-  }
-
-  if (isDimmed(space)) return; // espace filtré : pas d'ouverture de fiche
-  emit('space-click', space, { clientX: event.clientX, clientY: event.clientY });
 }
 
 // Re-dimensionne la vue quand on change de hall (dimensions de plan différentes)
@@ -324,7 +337,7 @@ defineExpose({ resetView, zoomIn, zoomOut });
     border-radius: 0.5rem;
   }
   .space-label {
-    font-size: 20px; 
+    font-size: 20px;
   }
 }
 </style>
