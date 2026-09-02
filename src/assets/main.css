@@ -1,0 +1,32 @@
+:root {
+  --primary-color: #0066ff;
+  --highlight-color: #ff0055;
+  --bg-color: #f4f6f8;
+  --card-bg: #ffffff;
+  --text-color: #1e1e24;
+
+  /* alias utilisés par les composants du plan d'exposition
+     (ExhibitionPlanViewer, SearchBar, ExhibitorCard, ...) — on les fait
+     pointer vers votre palette existante plutôt que d'en dupliquer une. */
+  --plan-accent: var(--primary-color);
+  --plan-accent-soft: #dbeafe;
+  --plan-surface: var(--card-bg);
+  --plan-surface-hover: #f1f5f9;
+  --plan-text: var(--text-color);
+  --plan-text-muted: #64748b;
+  --plan-border: #e2e8f0;
+  --plan-bg: var(--bg-color);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow: hidden;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
