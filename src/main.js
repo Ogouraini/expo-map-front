@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import App from './App.vue'
-import './assets/main.css'
+import '../public/assets/main.css'
 
 async function enableMocking() {
   if (!import.meta.env.DEV) return

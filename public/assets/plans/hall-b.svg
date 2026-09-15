@@ -1,0 +1,28 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+	<style>
+		.s0 { fill: #000000 } 
+		.s1 { fill: #808080 } 
+	</style>
+	<path id="space-b3" fill-rule="evenodd" class="s0" d="m204.18 267.32v79.57h-76.12v-79.57z"/>
+	<path id="space-b-entrance-1" fill-rule="evenodd" class="s1" d="m86.97 799.89l-179.36-2.48-53.06-171.35 146.56-103.41 143.64 107.43z"/>
+	<path id="space-b-entrance-2" fill-rule="evenodd" class="s1" d="m1193.97 285.28l-116.33-141.72 98.84-154.43 177.42 46.28 10.8 183.03z"/>
+	<path id="space-b11" fill-rule="evenodd" class="s0" d="m213 363.95v142.03h-212.69v-142.03z"/>
+	<path id="space-b12" fill-rule="evenodd" class="s0" d="m623.64 584.52v50.48h-205.97v-50.48z"/>
+	<path id="space-b-conf-2" fill-rule="evenodd" class="s1" d="m1200 739.25v60.75h-472.39v-60.75z"/>
+	<path id="space-b-conf-1" fill-rule="evenodd" class="s1" d="m309 0v235h-309v-235z"/>
+	<path id="space-b14" fill-rule="evenodd" class="s0" d="m507 415v75h-171v-75z"/>
+	<path id="space-b9" fill-rule="evenodd" class="s0" d="m1030 287v94h-192v-94z"/>
+	<path id="space-b15" fill-rule="evenodd" class="s0" d="m774 236v97h-193v-97z"/>
+	<path id="space-b6" fill-rule="evenodd" class="s0" d="m517 248v91h-185v-91z"/>
+	<path id="space-b-accueil" fill-rule="evenodd" class="s1" d="m632.67 742.57v57.33h-165.67v-57.33z"/>
+	<path id="space-b13" fill-rule="evenodd" class="s0" d="m441.04 748.66v51.34h-214.92v-51.34z"/>
+	<path id="space-b-press" fill-rule="evenodd" class="s1" d="m1200 439v224h-156v-224z"/>
+	<path id="space-b5" fill-rule="evenodd" class="s0" d="m769.64 428.57v55.61h-192.54v-55.61z"/>
+	<path id="space-b10" fill-rule="evenodd" class="s0" d="m1017 431.66v55.61h-210.45v-55.61z"/>
+	<path id="space-b8" fill-rule="evenodd" class="s0" d="m790 0.1v55.62h-212.69v-55.62z"/>
+	<path id="space-b4" fill-rule="evenodd" class="s0" d="m71.64 266.32v79.57h-71.64v-79.57z"/>
+	<path id="space-b-wc-1" fill-rule="evenodd" class="s1" d="m541 0.26v146.31h-190.3v-146.31z"/>
+	<path id="space-b7" fill-rule="evenodd" class="s0" d="m1046 0.37v59.04h-203.73v-59.04z"/>
+	<path id="space-b1" fill-rule="evenodd" class="s0" d="m946 574v64h-212v-64z"/>
+	<path id="space-b2" fill-rule="evenodd" class="s0" d="m792 111v68h-212v-68z"/>
+</svg>
